@@ -1,0 +1,35 @@
+<?php
+$people = intval(trim(fgets(STDIN)));
+$slicesPerPerson = intval(trim(fgets(STDIN)));
+
+$people = 20;
+$slicePerPerson = 5;
+
+$totalSlicesNeeded = $people * $slicePerPerson;
+
+$pizzaPackages = [
+    ["name" => "Small Pack", "Price" => 15, "slice" => 10],
+    ["name" => "Medium Pack", "Price" => 25, "slice" => 20],
+    ["name" => "Large Pack", "Price" => 35, "slice" => 30],
+    ["name" => "Extra-Large Pack", "Price" => 50, "slice" => 50],
+];
+
+$bestOption = null;
+$minCost = PHP_INT_MAX;
+
+echo "Total Slices Needed: $totalSlicesNeeded\n";
+
+foreach ($pizzaPackages as $package){
+    $packsNeeded = ceil($totalSlicesNeeded / $package ["slice"]);
+    $totalCost = $packsNeeded * $package ["Price"];
+
+echo "{$package ['name']} : $packsNeeded packs required, Cost: $totalCost\n";
+
+if ($totalCost < $minCost){
+$minCost = $totalCost;
+$bestOption = $package["name"];
+}
+}
+
+echo "Best Option : $bestOption cost of $minCost\n";
+?>
